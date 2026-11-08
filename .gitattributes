@@ -1,0 +1,3 @@
+# Always LF line endings in checkouts and in `git archive`, whatever core.autocrlf says.
+# (Git for Windows defaults to CRLF, which breaks LF-based lint checks such as Prettier.)
+* text=auto eol=lf
