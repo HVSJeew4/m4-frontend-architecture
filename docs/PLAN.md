@@ -43,11 +43,11 @@ Environment: Node 26 / npm 11 (as in Months 2–3). Exact versions are pinned wh
 
 Required files (participant name `subhash-jeewantha`), built into `submission/`:
 
-- [ ] `subhash-jeewantha-month4-app.zip` – React project (source only: no `node_modules`, `dist`, `.env`)
-- [ ] `subhash-jeewantha-month4-storybook.zip` – Storybook build (`storybook-static/`)
-- [ ] `subhash-jeewantha-month4-lighthouse.pdf` – Lighthouse report
-- [ ] `subhash-jeewantha-month4-accessibility.md` – A11y audit
-- [ ] `subhash-jeewantha-month4-architecture.md` – Architecture decisions
+- [x] `subhash-jeewantha-month4-app.zip` – React project (source only: no `node_modules`, `dist`, `.env`)
+- [x] `subhash-jeewantha-month4-storybook.zip` – Storybook build (`storybook-static/`)
+- [x] `subhash-jeewantha-month4-lighthouse.pdf` – Lighthouse report
+- [x] `subhash-jeewantha-month4-accessibility.md` – A11y audit
+- [x] `subhash-jeewantha-month4-architecture.md` – Architecture decisions
 
 Project structure from the brief:
 
