@@ -51,21 +51,21 @@ Required files (participant name `subhash-jeewantha`), built into `submission/`:
 
 Project structure from the brief:
 
-- [ ] `src/components/common/` – reusable components
-- [ ] `src/components/layout/` – layout components
-- [ ] `src/components/features/` – feature-specific components
-- [ ] `src/hooks/`, `src/stores/`, `src/pages/`, `src/utils/`, `src/types/`, `src/App.tsx`
+- [x] `src/components/common/` – reusable components
+- [x] `src/components/layout/` – layout components
+- [x] `src/components/features/` – feature-specific components
+- [x] `src/hooks/`, `src/stores/`, `src/pages/`, `src/utils/`, `src/types/`, `src/App.tsx`
 - Additions (to be justified in the architecture doc): `src/schemas/` (the brief's own
   `schemas/userSchema.ts`), `src/api/` (fetch client + React Query hooks), `src/mocks/` (MSW).
 
 Setup checklist from the brief:
 
-- [ ] Vite + React + TypeScript
-- [ ] Zustand or Redux Toolkit
-- [ ] React Router v6
-- [ ] React Query for server state
-- [ ] React Hook Form + Zod
-- [ ] Tailwind CSS or styled-components
+- [x] Vite + React + TypeScript
+- [x] Zustand or Redux Toolkit
+- [x] React Router v6
+- [x] React Query for server state
+- [x] React Hook Form + Zod
+- [x] Tailwind CSS or styled-components
 
 Storybook – required components (each with stories for the listed variants):
 
@@ -88,21 +88,22 @@ so each common component gets its story when it is built, and Part 4 completes t
 
 ### Part 1 – Application Setup (brief: 20 min)
 
-- [ ] Vite + React 18 + TypeScript (strict), React Router v6, TanStack Query, Zustand,
+- [x] Vite + React 18 + TypeScript (strict), React Router v6, TanStack Query, Zustand,
       React Hook Form + Zod, Tailwind – all pinned in `package.json` (CQ)
-- [ ] Brief's folder structure under `src/`, with path alias `@/` (CQ)
-- [ ] ESLint (typescript-eslint, react-hooks, jsx-a11y) + Prettier; scripts `lint`, `format`,
+- [x] Brief's folder structure under `src/`, with path alias `@/` (CQ)
+- [x] ESLint (typescript-eslint, react-hooks, jsx-a11y, storybook) + Prettier; scripts `lint`, `format`,
       `typecheck`, `test`, `build`, `preview`, `storybook`, `build-storybook` (CQ, A11y)
-- [ ] Vitest + RTL + vitest-axe set up; one smoke test of the app shell (CQ)
-- [ ] MSW set up: `src/mocks/` handlers + seeded data (≈ 250 users, 12 months of metrics,
-      activity, notifications) persisted to `localStorage`, artificial latency, and a way to
-      force errors to show error states (FC)
-- [ ] Storybook initialised with the a11y addon and Tailwind; MSW addon for data stories (CL)
-- [ ] Layout shell: `AppLayout` with skip link, header, responsive sidebar/nav, `<main>` landmark (A11y)
-- [ ] README: setup, scripts, structure; `.env.example` (only if a variable is actually needed)
-- Files: `package.json`, `vite.config.ts`, `tsconfig*.json`, `eslint.config.js`, `.prettierrc`,
-  `tailwind`/`postcss` config, `.storybook/`, `src/main.tsx`, `src/App.tsx`, `src/mocks/*`,
-  `src/components/layout/*`, `src/test/setup.ts`
+- [x] Vitest + RTL + axe-core set up (own 5-line `axeViolations` helper instead of the stale
+      `vitest-axe`); smoke tests of the app shell (CQ)
+- [x] MSW set up: `src/mocks/` handlers for the whole API + seeded data (250 users, 180 days of
+      metrics, activity, notifications) persisted to `localStorage`, artificial latency, and
+      `?mock-fail=` / `?mock-latency=` / `?mock-reset` to show error and loading states (FC)
+- [x] Storybook initialised with the a11y addon and Tailwind; MSW addon for data stories (CL)
+- [x] Layout shell: `AppLayout` with skip link, header, responsive sidebar/nav, `<main>` landmark (A11y)
+- [x] README: setup, scripts, structure, mock API. No `.env` variable is needed yet.
+- Version notes: TypeScript **6.0** (typescript-eslint does not support 7 yet), ESLint **9**
+  (eslint-plugin-jsx-a11y does not support 10 yet), MSW **3** (`onUnhandledFrame` replaces
+  `onUnhandledRequest`), Tailwind 4 via `@tailwindcss/vite` (no tailwind/postcss config files).
 - Commit: `chore: set up Vite, React 18, TypeScript and tooling`
 
 ### Part 2 – Core Features (brief: 60 min)
@@ -125,6 +126,9 @@ so each common component gets its story when it is built, and Part 4 completes t
 - [ ] **Notifications** – `stores/notificationStore.ts` for toasts (auto-dismiss, `aria-live`)
       plus a notification centre: header bell with unread badge, panel listing server
       notifications, mark-as-read / mark-all-read (FC, SM)
+- [ ] API client (`src/api/client.ts`): bearer token, `ApiError` with status + field errors, 401 → logout,
+      no retries on 4xx; requests wait for the mock API to be ready, so the **first render no longer
+      waits for MSW** (its browser chunk is ~155 KB gzipped – found in Part 1's build) (FC, Perf)
 - [ ] Loading skeletons, empty states and error states (with retry) on every data view (FC)
 - [ ] Common components built here, each with stories + tests: Button, Input, Select, Card,
       Table, Alert, Modal (CL)
@@ -158,6 +162,7 @@ so each common component gets its story when it is built, and Part 4 completes t
 - [ ] `memo` / `useMemo` / `useCallback` where profiling shows re-renders – not by default (Perf)
 - [ ] Virtualised user list for large datasets (e.g. a "show 10,000 users" stress mode) (Perf)
 - [ ] Bundle check (`rollup-plugin-visualizer` or `vite build` report); fonts/images optimised (Perf)
+- [ ] Route changes: update `document.title` and move focus to the page heading (A11y)
 - [ ] Remaining components + stories: **Tabs** (controlled) – Storybook now has all 8 (CL)
 - [ ] Dark mode (bonus, included): system preference + toggle in the header, stored in the UI store (FC bonus)
 - [ ] Automated a11y: vitest-axe on every page + Storybook a11y addon with no violations (A11y)

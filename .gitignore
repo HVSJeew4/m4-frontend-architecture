@@ -15,3 +15,7 @@ coverage/
 .vs/
 *.log
 .DS_Store
+
+# Storybook build output and logs
+storybook-static/
+*.tsbuildinfo

@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+
+/* System font stack (Tailwind's default `font-sans`): no web-font download, which helps Lighthouse. */
+@layer base {
+  body {
+    @apply bg-slate-50 font-sans text-slate-900 antialiased;
+  }
+}
