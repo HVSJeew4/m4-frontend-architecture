@@ -14,5 +14,8 @@ export default defineConfig({
     include: ['src/**/*.test.{ts,tsx}'],
     // Tests use MSW in Node; a stale handler from one test must not leak into the next.
     restoreMocks: true,
+    // Integration tests type key by key and wait for the mock API; 5 s (default) is too tight
+    // when all files run in parallel.
+    testTimeout: 15_000,
   },
 });

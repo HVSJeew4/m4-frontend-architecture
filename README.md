@@ -23,6 +23,7 @@ Plan and progress: [`docs/PLAN.md`](docs/PLAN.md). Brief: [`docs/CHALLENGE.md`](
 | Forms | React Hook Form 7 + Zod 4 |
 | Styling | Tailwind CSS 4 |
 | Mock API | MSW 3 (browser, tests and Storybook) |
+| Chart | Recharts 3 (lazy-loaded) |
 | Tests | Vitest 5, React Testing Library, user-event, axe-core |
 | Lint/format | ESLint 9 (typescript-eslint, react-hooks, jsx-a11y, storybook), Prettier |
 | Components | Storybook 10 with the a11y addon |
@@ -58,7 +59,7 @@ a reload. Add these to the page URL to see other states:
 
 Groups: `auth`, `users`, `metrics`, `activity`, `notifications`.
 
-**Demo sign-in** (used from Part 2): `admin@adminflow.test` or `editor@adminflow.test` with **any
+**Demo sign-in:** `admin@adminflow.test` or `editor@adminflow.test` with **any
 password of 8+ characters**. `user@adminflow.test` exists to show the "no admin access" error. No
 password is stored anywhere – the mock only checks the length.
 
@@ -85,39 +86,53 @@ npm test
 
 Tests run in jsdom with MSW in Node mode, so they use the same mock API as the browser. Each test
 starts from fresh seed data with no latency. Any request without a mock handler fails the test.
+125 tests in 19 files:
 
 | File | What it covers |
 |---|---|
 | `src/App.test.tsx` | App shell: routing, active nav link, skip link, mobile nav toggle, 404, axe |
-| `src/mocks/handlers.test.ts` | Mock API contract: auth, users (paging, sorting, filters, search, CRUD, soft delete), metrics, notifications, forced failures |
-| `src/mocks/config.test.ts` | URL parameters for latency, failures and reset |
+| `src/components/features/auth/auth.test.tsx` | Redirect to `/login` and back, login validation and server errors, sign-out clears the cache |
+| `src/components/features/users/users.test.tsx` | Paging, sorting (`aria-sort`), role filter, debounced search (one request), create, duplicate email, optimistic edit + rollback, delete + Undo, error + retry, axe |
+| `src/components/features/dashboard/dashboard.test.tsx` | Metric cards, range tabs + data table, activity, partial failure, axe |
+| `src/components/features/notifications/notifications.test.tsx` | Bell unread count, panel, mark read / all read, toasts |
+| `src/stores/authStore.test.ts` | Login/logout, `sessionStorage`, token on requests, 401 → session expired |
+| `src/hooks/useDebounce.test.ts` | Debounce timing with fake timers |
+| `src/utils/*.test.ts` | Safe post-login redirect, formatting |
+| `src/components/common/*.test.tsx` | The 8 library components (roles, keyboard, focus trap, axe) |
+| `src/mocks/*.test.ts` | Mock API contract and URL switches |
 
 Accessibility in tests uses `axe-core` through `src/test/axe.ts`. Colour contrast is skipped there
 because jsdom does not compute styles; it is checked in a real browser (Storybook a11y addon, Lighthouse).
+For the same reason the Recharts chart is replaced by an empty stub in tests (`src/test/setup.ts`);
+its data is tested through the chart's data table.
+
+The first failing tests were committed on their own (`test: failing test for …`) before the code.
 
 ## Project Structure
 
 ```
 src/
-├── api/              # React Query client (API hooks from Part 2)
+├── api/              # fetch client (ApiError, token) + React Query hooks per resource
 ├── components/
-│   ├── common/       # Reusable components + stories (Part 2+)
+│   ├── common/       # The component library: Button, Input, Select, Modal, Card, Table, Alert, Tabs, … + stories
 │   ├── layout/       # AppLayout, Header, Sidebar, SkipLink
-│   └── features/     # Feature-specific components (Part 2+)
-├── hooks/            # Custom hooks (Part 2+)
+│   └── features/     # auth, dashboard, users, notifications
+├── hooks/            # useDebounce, useClearCacheOnSignOut
 ├── mocks/            # MSW mock API: handlers, seed data, localStorage "db", config
-├── pages/            # Route pages
-├── stores/           # Zustand stores (Part 2+)
+├── pages/            # Route pages (Login, Dashboard, Users, Notifications, NotFound)
+├── schemas/          # Zod schemas (userSchema from the brief, loginSchema)
+├── stores/           # Zustand: authStore, notificationStore (toasts)
 ├── test/             # Test setup and helpers
 ├── types/            # Shared TypeScript types (API contract)
-├── utils/            # Utilities
+├── utils/            # format, safeRedirect, cn, router future flags
 ├── App.tsx           # Routes
 └── main.tsx          # Providers, starts the mock API, renders the app
 .storybook/           # Storybook config and introduction page
 public/               # Static files, including MSW's generated mockServiceWorker.js
 ```
 
-`api/`, `mocks/` and `test/` are additions to the brief's structure. `schemas/` follows in Part 3.
+`api/`, `mocks/`, `schemas/` and `test/` are additions to the brief's structure. `schemas/` is
+named in the brief's own example (`schemas/userSchema.ts`).
 
 ## Design Decisions
 
@@ -133,12 +148,33 @@ public/               # Static files, including MSW's generated mockServiceWorke
 - **Accessible layout from the start:** skip link, landmarks (`header`, `nav`, `main`), the menu
   button reports `aria-expanded`, and the active link gets `aria-current="page"` (from `NavLink`).
 - **System font stack** – no web-font download.
+- **Three kinds of state, three homes.** Server data (users, metrics, notifications) lives in React
+  Query, which caches, refetches and tracks loading/error. Client state that several components
+  share (the session, toasts) lives in Zustand. View state that should survive a reload (users
+  page, sort, filters, search) lives in the URL.
+- **Session in `sessionStorage`:** survives a reload, ends with the tab. Reads are synchronous, so
+  a reload never flashes the login page. A 401 from any request signs out with a "session expired" message.
+- **Safe post-login redirect:** only plain in-app paths are accepted (`utils/safeRedirect.ts`),
+  which also covers the React Router v6 backslash advisory.
+- **Optimistic edit:** the row changes in every cached page immediately, and is rolled back with an
+  error toast if the server refuses. Create waits for the server, because it needs the new id.
+- **Soft delete with Undo** instead of "Are you really sure?" twice: one confirmation, then a toast
+  with Undo that stays 10 s (and pauses while hovered or focused).
+- **Hand-built Modal with an explicit focus trap** (the brief asks for one), plus `inert` on the
+  rest of the page and focus returned to the trigger.
+- **Native `<select>`** for single and multi-select: accessible on every device for free.
+- **Chart loaded on demand** (`React.lazy`): Recharts (~109 KB gzipped) never loads on the login page.
+  A data table next to the chart is its text alternative.
+- **Requests wait for the mock API, the page does not:** `setApiReady()` in `main.tsx`.
 
 ## Challenge Coverage
 
 - [x] Part 1 – Application setup (Vite, React 18, TypeScript, Router v6, React Query, Zustand,
       React Hook Form + Zod, Tailwind, mock API, Storybook, layout shell)
-- [ ] Part 2 – Core features
+- [x] Part 2 – Core features: authentication with protected routes, dashboard (metrics, trend
+      chart, activity, quick actions), user CRUD (pagination, sorting, filtering, optimistic edit,
+      soft delete with Undo), debounced search, notifications (toasts + notification centre),
+      loading/empty/error states, all 8 Storybook components
 - [ ] Part 3 – Forms & validation
 - [ ] Part 4 – Accessibility & performance
 
@@ -150,4 +186,9 @@ public/               # Static files, including MSW's generated mockServiceWorke
 - **typescript-eslint → minimatch advisory:** denial of service through crafted glob patterns, in a
   dev-only lint tool that only sees our own patterns. Accepted.
 - **MSW in the production build:** needed because there is no backend. Its browser chunk is about
-  155 KB gzipped; Part 2 stops the first render from waiting for it.
+  155 KB gzipped; only API requests wait for it, not the first render.
+- **Main bundle is 116 KB gzipped** after Part 2 (all pages in one chunk). Route-level code
+  splitting is planned for Part 4.
+- **Token in `sessionStorage`** can be read by any script on the page (XSS). A real backend should
+  use an `HttpOnly` cookie instead; with a browser-only mock this is not possible.
+- **The chart is not unit-tested** (jsdom cannot draw it); its data is tested via the data table.

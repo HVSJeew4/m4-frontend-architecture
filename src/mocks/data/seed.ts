@@ -2,19 +2,13 @@
 // out of the bundle-size budget: the mock runs in the production build too (there is no backend).
 import type { Activity, ActivityType, TrendPoint } from '@/types/dashboard';
 import type { AppNotification } from '@/types/notification';
-import type { Role, User } from '@/types/user';
+import type { User } from '@/types/user';
+import { DEMO_ACCOUNTS } from './demoAccounts';
 
 const SEED = 20261108;
 const DAY_MS = 24 * 60 * 60 * 1000;
 export const TREND_DAYS = 180;
 const USER_COUNT = 250;
-
-/** The accounts named on the login page. Any password of 8+ characters works (no secrets stored). */
-export const DEMO_ACCOUNTS = [
-  { email: 'admin@adminflow.test', name: 'Avery Admin', role: 'admin' },
-  { email: 'editor@adminflow.test', name: 'Eden Editor', role: 'editor' },
-  { email: 'user@adminflow.test', name: 'Umar User', role: 'user' },
-] as const satisfies readonly { email: string; name: string; role: Role }[];
 
 const FIRST_NAMES = [
   'Amara',

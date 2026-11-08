@@ -4,7 +4,7 @@ import type { MetricsSummary, TrendPoint } from '@/types/dashboard';
 import type { NotificationList } from '@/types/notification';
 import type { User } from '@/types/user';
 import { mockConfig } from './config';
-import { DEMO_ACCOUNTS } from './data/seed';
+import { DEMO_ACCOUNTS } from './data/demoAccounts';
 import { getDb } from './db';
 
 const PASSWORD = 'any-password'; // the mock accepts any 8+ character password

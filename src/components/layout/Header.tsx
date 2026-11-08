@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { UserMenu } from '@/components/features/auth/UserMenu';
+import { NotificationBell } from '@/components/features/notifications/NotificationBell';
 
 interface HeaderProps {
   navId: string;
@@ -36,7 +38,10 @@ export function Header({ navId, navOpen, onToggleNav, className = '' }: HeaderPr
       >
         AdminFlow
       </Link>
-      {/* Notification bell, theme toggle and user menu are added in Parts 2 and 4. */}
+      <div className="ml-auto flex items-center gap-2">
+        <NotificationBell />
+        <UserMenu />
+      </div>
     </header>
   );
 }

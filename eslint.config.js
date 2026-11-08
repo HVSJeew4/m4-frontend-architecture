@@ -19,6 +19,9 @@ export default tseslint.config(
     extends: [reactHooks.configs.flat.recommended, jsxA11y.flatConfigs.strict],
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      // Tab panels (WAI-ARIA tabs pattern) and scrollable regions (axe: scrollable-region-focusable)
+      // must be keyboard-focusable, so tabIndex={0} is allowed on those two roles.
+      'jsx-a11y/no-noninteractive-tabindex': ['error', { tags: [], roles: ['tabpanel', 'region'] }],
     },
   },
   {

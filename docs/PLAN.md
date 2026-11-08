@@ -69,14 +69,14 @@ Setup checklist from the brief:
 
 Storybook – required components (each with stories for the listed variants):
 
-- [ ] Button (primary, secondary, danger variants)
-- [ ] Input (text, email, password, with error)
-- [ ] Select (single, multi-select)
-- [ ] Modal (with focus trap)
-- [ ] Card (with header, body, footer)
-- [ ] Table (sortable, with pagination)
-- [ ] Alert (info, success, warning, error)
-- [ ] Tabs (controlled)
+- [x] Button (primary, secondary, danger variants)
+- [x] Input (text, email, password, with error)
+- [x] Select (single, multi-select)
+- [x] Modal (with focus trap)
+- [x] Card (with header, body, footer)
+- [x] Table (sortable, with pagination)
+- [x] Alert (info, success, warning, error)
+- [x] Tabs (controlled)
 
 ## 4. Part-by-part plan
 
@@ -108,54 +108,55 @@ so each common component gets its story when it is built, and Part 4 completes t
 
 ### Part 2 – Core Features (brief: 60 min)
 
-- [ ] **Auth** – `stores/authStore.ts` with the brief's `AuthState` (`user`, `token`, `isLoading`,
-      `login`, `logout`) plus an `error`; session persisted to `sessionStorage`; mock
-      `POST /api/auth/login`; `ProtectedRoute` that redirects to `/login` and back to the original
-      page after login; logout clears the store and the React Query cache (FC, SM)
-- [ ] **Dashboard** – metric cards (users, revenue, orders, with change vs. previous period),
-      line chart of trend data (with a text/table alternative), recent activity list,
-      quick actions (add user, view users, view notifications) (FC, A11y)
-- [ ] **Users list** – server-side pagination, sorting, filtering (role, status) via
-      React Query; filters/sort/page kept in the URL so they survive reload and back button (FC, SM)
-- [ ] **Create user** – form in a modal or page; success toast; list invalidated (FC)
-- [ ] **Update user** – pre-filled form; optimistic update with rollback on error (FC, SM)
-- [ ] **Delete user** – confirmation dialog; soft delete (`deletedAt` set, hidden from the list,
-      "Undo" in the toast restores it) (FC)
-- [ ] **Search** – `hooks/useDebounce.ts` (brief's hook, 300 ms) driving the users query;
-      minimum length, clear button, `aria-live` result count (FC, A11y)
-- [ ] **Notifications** – `stores/notificationStore.ts` for toasts (auto-dismiss, `aria-live`)
-      plus a notification centre: header bell with unread badge, panel listing server
-      notifications, mark-as-read / mark-all-read (FC, SM)
-- [ ] API client (`src/api/client.ts`): bearer token, `ApiError` with status + field errors, 401 → logout,
-      no retries on 4xx; requests wait for the mock API to be ready, so the **first render no longer
-      waits for MSW** (its browser chunk is ~155 KB gzipped – found in Part 1's build) (FC, Perf)
-- [ ] Loading skeletons, empty states and error states (with retry) on every data view (FC)
-- [ ] Common components built here, each with stories + tests: Button, Input, Select, Card,
-      Table, Alert, Modal (CL)
-- [ ] Tests: auth store, `ProtectedRoute`, `useDebounce` (fake timers), users CRUD flows
-      against MSW, optimistic-update rollback (CQ)
-- Files: `src/stores/*`, `src/api/*`, `src/hooks/*`, `src/pages/{Login,Dashboard,Users,NotFound}.tsx`,
-  `src/components/features/{auth,dashboard,users,notifications}/*`, `src/components/common/*`,
-  `src/types/*`
-- Commits: `test: failing test for …` where TDD fits, then `feat: …` per feature
+- [x] **Auth** – `stores/authStore.ts` with the brief's `AuthState` (`user`, `token`, `isLoading`,
+      `login`, `logout`) plus `error` and `expireSession`; session persisted to `sessionStorage`;
+      `ProtectedRoute` redirects to `/login` and back to the original page (only safe in-app paths,
+      `utils/safeRedirect.ts`); sign-out and a 401 both clear the React Query cache (FC, SM)
+- [x] **Dashboard** – metric cards (users, revenue, orders, change vs. previous 30 days), lazy-loaded
+      line chart with a data-table alternative and 7/30/90-day **Tabs**, recent activity, quick actions (FC, A11y)
+- [x] **Users list** – server-side pagination, sorting, filtering (role, status) via React Query;
+      page/sort/filters/search in the URL (reload, back button, shareable links) (FC, SM)
+- [x] **Create user** – form in a modal; validation; success toast; list invalidated (FC)
+- [x] **Update user** – pre-filled form; optimistic update across all cached pages, rollback on error (FC, SM)
+- [x] **Delete user** – confirmation dialog (Cancel focused first); soft delete; "Undo" in the toast restores it (FC)
+- [x] **Search** – `hooks/useDebounce.ts` (brief's hook, 300 ms) driving the users query; clear button,
+      `role="status"` result count. No minimum length: the server handles any length cheaply, and a
+      minimum would make short names like "Al" look unfindable (FC, A11y)
+- [x] **Notifications** – `stores/notificationStore.ts` for toasts (auto-dismiss, paused on hover/focus,
+      longer when there is an Undo button, `aria-live`) plus a notification centre: header bell with
+      unread count in its name, panel, notifications page, mark-as-read (optimistic) / mark-all-read (FC, SM)
+- [x] API client (`src/api/client.ts`): bearer token, `ApiError` with status + field errors, 401 → session
+      expired, no retries on 4xx; only requests wait for MSW, the **first render does not** (FC, Perf)
+- [x] Loading skeletons (+ screen-reader "Loading …"), empty states and error states with retry on every data view (FC)
+- [x] All 8 brief components built with stories + tests: Button, Input, Select, **Modal** (focus trap),
+      Card, Table (+ Pagination), Alert, **Tabs**; plus Checkbox, Skeleton, ErrorState, icons (CL)
+- [x] Tests: auth store, `ProtectedRoute` + login flow, `useDebounce` (fake timers), safe redirect,
+      users CRUD flows against MSW, optimistic update + rollback, dashboard, notifications, components (CQ)
+- Moved here from Part 3, because the brief's Part 2 CRUD table already requires "Form validation":
+  `userSchema` (the brief's schema), `loginSchema`, a basic `UserForm` and `LoginForm` with React Hook Form + Zod.
+- Moved here from Part 4: **Modal** (needed by the delete confirmation) and **Tabs** (chart range).
+- Bugs the tests caught: logout request sent without its token (store cleared it first); edit
+  toasts lost because `mutate()` callbacks die with the unmounting dialog (now `mutateAsync`).
+- Commits: `test: failing test for auth store, protected route and debounced search` (TDD red),
+  then `feat: add auth, dashboard, user management, search and notifications`
 
 ### Part 3 – Forms & Validation (brief: 20 min)
 
-- [ ] `schemas/userSchema.ts` – the brief's schema (name ≥ 2, email, role enum, isActive),
-      types inferred with `z.infer` (FC, CQ)
-- [ ] `schemas/loginSchema.ts` for the login form (FC)
-- [ ] `UserForm` with React Hook Form + `zodResolver`; reused for create and edit (CQ)
-- [ ] Accessible errors: `aria-invalid`, `aria-describedby` to the message, focus moves to the
-      first invalid field on submit, required fields marked (A11y)
-- [ ] Server errors shown in the form (e.g. "email already exists" from the mock API) (FC)
-- [ ] Submit button disabled + loading state while saving; unsaved-change guard on cancel (FC)
-- [ ] Tests: schema rules, form error rendering, submit success/failure (CQ)
-- Commit: `feat: add validated user and login forms`
+- [x] `schemas/userSchema.ts` – the brief's schema, types inferred with `z.infer` (done in Part 2)
+- [x] `schemas/loginSchema.ts` for the login form (done in Part 2)
+- [x] `UserForm` with React Hook Form + `zodResolver`; reused for create and edit (done in Part 2)
+- [x] `aria-invalid`, `aria-describedby` to hint and error, required fields marked (done in Part 2, in Input/Select/Checkbox)
+- [ ] Focus moves to the first invalid field on submit – verify and test (A11y)
+- [ ] Server field errors mapped onto the field (409 "email already exists" under Email, not only an alert) (FC)
+- [ ] Unsaved-change guard: confirm before closing a dirty form (Cancel, Escape, backdrop) (FC)
+- [ ] Edit form: Save disabled until something changed; trim/normalise email (lower-case) in the schema (FC)
+- [ ] Tests: schema rules (unit), server error mapping, unsaved-change guard (CQ)
+- Commit: `feat: add server-side field errors and unsaved-change guard to forms`
 
 ### Part 4 – Accessibility & Performance (brief: 20 min + offline)
 
-- [ ] Modal focus trap, `Escape` to close, focus returned to the trigger, `aria-labelledby` /
-      `aria-describedby` as in the brief (A11y)
+- [x] Modal focus trap, `Escape` to close, focus returned to the trigger, `aria-labelledby` /
+      `aria-describedby` as in the brief (A11y) (done in Part 2, tested in `Modal.test.tsx`)
 - [ ] Icon buttons with `aria-label`, decorative icons `aria-hidden`, visible focus rings,
       colour contrast ≥ 4.5:1 in light and dark themes, reflow at 320 px, 200 % zoom (A11y)
 - [ ] Code splitting with `lazy()` + `Suspense` per route; Recharts only in the dashboard chunk (Perf)
@@ -163,9 +164,9 @@ so each common component gets its story when it is built, and Part 4 completes t
 - [ ] Virtualised user list for large datasets (e.g. a "show 10,000 users" stress mode) (Perf)
 - [ ] Bundle check (`rollup-plugin-visualizer` or `vite build` report); fonts/images optimised (Perf)
 - [ ] Route changes: update `document.title` and move focus to the page heading (A11y)
-- [ ] Remaining components + stories: **Tabs** (controlled) – Storybook now has all 8 (CL)
+- [x] Remaining components + stories: **Tabs** (controlled) – Storybook now has all 8 (CL) (done in Part 2)
 - [ ] Dark mode (bonus, included): system preference + toggle in the header, stored in the UI store (FC bonus)
-- [ ] Automated a11y: vitest-axe on every page + Storybook a11y addon with no violations (A11y)
+- [ ] Automated a11y: axe-core (`src/test/axe.ts`) on every page + Storybook a11y addon with no violations (A11y)
 - [ ] Manual a11y audit: keyboard-only walkthrough, NVDA screen reader, contrast, zoom/reflow;
       results in `docs/accessibility.md` (A11y)
 - [ ] Lighthouse user-flow on the production build (`/login`, `/dashboard`, `/users`),
