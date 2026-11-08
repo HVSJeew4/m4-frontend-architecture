@@ -184,6 +184,18 @@ export const handlers = [
           return order * direction || a.id.localeCompare(b.id);
         });
 
+      // ?all=1: every match in one response, for the virtual list (which only renders what is
+      // on screen, so the client can handle thousands of rows).
+      if (params.get('all') === '1') {
+        return HttpResponse.json<Paginated<User>>({
+          items: matches,
+          page: 1,
+          pageSize: matches.length,
+          total: matches.length,
+          totalPages: 1,
+        });
+      }
+
       const start = (page - 1) * pageSize;
       return HttpResponse.json<Paginated<User>>({
         items: matches.slice(start, start + pageSize),

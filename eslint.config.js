@@ -22,11 +22,18 @@ export default tseslint.config(
       // Tab panels (WAI-ARIA tabs pattern) and scrollable regions (axe: scrollable-region-focusable)
       // must be keyboard-focusable, so tabIndex={0} is allowed on those two roles.
       'jsx-a11y/no-noninteractive-tabindex': ['error', { tags: [], roles: ['tabpanel', 'region'] }],
+      // `const { page, ...filters } = params` – dropping keys with a rest object is intentional.
+      '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
     },
   },
   {
-    files: ['*.config.{js,ts}', 'scripts/**/*.js'],
+    files: ['*.config.{js,ts}'],
     languageOptions: { globals: globals.node },
+  },
+  {
+    // Scripts run in Node, but the functions they pass to page.evaluate() run in the browser.
+    files: ['scripts/**/*.{js,mjs}'],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
   storybook.configs['flat/recommended'],
 );

@@ -13,7 +13,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 // All text colours here pass WCAG AA (4.5:1) on their background.
 const VARIANTS: Record<ButtonVariant, string> = {
   primary: 'bg-blue-700 text-white hover:bg-blue-800',
-  secondary: 'border border-slate-300 bg-white text-slate-800 hover:bg-slate-50',
+  secondary: 'border border-slate-300 bg-surface text-slate-800 hover:bg-slate-50',
   danger: 'bg-red-700 text-white hover:bg-red-800',
   ghost: 'text-slate-700 hover:bg-slate-100',
 };
@@ -46,7 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       aria-busy={isLoading || undefined}
       className={cn(
         'inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors',
-        'focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 focus-visible:outline-none',
+        'focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:outline-none',
         'disabled:cursor-not-allowed disabled:opacity-60',
         VARIANTS[variant],
         SIZES[size],

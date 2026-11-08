@@ -19,3 +19,6 @@ coverage/
 # Storybook build output and logs
 storybook-static/
 *.tsbuildinfo
+
+# Full Lighthouse HTML reports (the PDF and summary.json are committed)
+docs/lighthouse/*.html

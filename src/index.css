@@ -1,5 +1,45 @@
 @import 'tailwindcss';
 
+/* `dark:` utilities apply when <html> has the "dark" class (set by uiStore / index.html),
+   not only from the OS setting – so the in-app toggle works. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Colour tokens for things whose colour depends on the theme. */
+@theme {
+  --color-surface: var(--color-white); /* cards, dialogs, inputs */
+  --color-accent: var(--color-blue-800); /* links and accent text */
+  --color-danger: var(--color-red-700); /* error text, destructive icons */
+  --color-success: var(--color-green-800); /* positive change */
+  --color-focus: var(--color-blue-700); /* focus rings */
+}
+
+/* Dark theme.
+   - The neutral (slate) scale is reversed: slate-50 ↔ slate-950, 100 ↔ 900, … So
+     "text-slate-900" always means "strongest text" and "bg-slate-50" "page background", in both
+     themes, and the many neutral classes need no dark: twin.
+   - Tokens switch to lighter shades, so text and focus rings keep their contrast on dark
+     backgrounds (4.5:1 for text, 3:1 for focus rings).
+   - Coloured tints (alerts, badges, highlights) use explicit dark: classes where they are used. */
+.dark {
+  --color-slate-50: oklch(12.9% 0.042 264.695);
+  --color-slate-100: oklch(20.8% 0.042 265.755);
+  --color-slate-200: oklch(27.9% 0.041 260.031);
+  --color-slate-300: oklch(37.2% 0.044 257.287);
+  --color-slate-400: oklch(44.6% 0.043 257.281);
+  --color-slate-500: oklch(55.4% 0.046 257.417);
+  --color-slate-600: oklch(70.4% 0.04 256.788);
+  --color-slate-700: oklch(86.9% 0.022 252.894);
+  --color-slate-800: oklch(92.9% 0.013 255.508);
+  --color-slate-900: oklch(96.8% 0.007 247.896);
+  --color-slate-950: oklch(98.4% 0.003 247.858);
+
+  --color-surface: oklch(20.8% 0.042 265.755);
+  --color-accent: var(--color-blue-300);
+  --color-danger: var(--color-red-300);
+  --color-success: var(--color-green-300);
+  --color-focus: var(--color-blue-400);
+}
+
 /* System font stack (Tailwind's default `font-sans`): no web-font download, which helps Lighthouse. */
 @layer base {
   body {

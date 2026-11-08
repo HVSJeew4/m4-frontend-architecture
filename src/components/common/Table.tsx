@@ -51,7 +51,7 @@ export function Table<T>({
     <div className="flex flex-col gap-4">
       {/* Wide tables scroll inside this region on small screens; tabIndex lets keyboard users scroll it. */}
       <div
-        className="overflow-x-auto rounded-lg border border-slate-200 bg-white"
+        className="overflow-x-auto rounded-lg border border-slate-200 bg-surface"
         role="region"
         aria-label={caption}
         tabIndex={0}
@@ -81,7 +81,7 @@ export function Table<T>({
                       <button
                         type="button"
                         onClick={() => onSortChange(column.sortKey!)}
-                        className="-mx-2 inline-flex items-center gap-1 rounded px-2 py-1 hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+                        className="-mx-2 inline-flex items-center gap-1 rounded px-2 py-1 hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none"
                       >
                         {column.header}
                         {active && sort?.order === 'asc' && <ArrowUpIcon className="h-4 w-4" />}
@@ -101,7 +101,9 @@ export function Table<T>({
               Array.from({ length: 5 }, (_, i) => (
                 <tr key={`skeleton-${i}`}>
                   {columns.map((column) => (
-                    <td key={column.key} className="px-4 py-3">
+                    // h-16: as tall as a real row (its 40 px buttons + padding), so the
+                    // page does not jump when the data replaces the skeleton (CLS).
+                    <td key={column.key} className="h-16 px-4 py-3">
                       <Skeleton className="h-4 w-full max-w-40" />
                     </td>
                   ))}

@@ -65,7 +65,7 @@ export function NotificationBell() {
           id={panelId}
           role="region"
           aria-label="Notifications"
-          className="absolute right-0 z-30 mt-2 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-slate-200 bg-white text-slate-900 shadow-xl"
+          className="absolute right-0 z-30 mt-2 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-slate-200 bg-surface text-slate-900 shadow-xl"
         >
           <div className="flex items-center justify-between border-b border-slate-200 px-4 py-2">
             <h2 className="font-semibold">Notifications</h2>
@@ -73,7 +73,7 @@ export function NotificationBell() {
               <button
                 type="button"
                 onClick={() => markAll.mutate()}
-                className="rounded px-2 py-1 text-sm font-medium text-blue-800 hover:bg-blue-50 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+                className="rounded px-2 py-1 text-sm font-medium text-accent hover:bg-blue-50 dark:hover:bg-blue-950 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none"
               >
                 Mark all as read
               </button>
@@ -85,7 +85,7 @@ export function NotificationBell() {
           <Link
             to="/notifications"
             onClick={() => setOpen(false)}
-            className="block border-t border-slate-200 px-4 py-2 text-center text-sm font-medium text-blue-800 hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+            className="block border-t border-slate-200 px-4 py-2 text-center text-sm font-medium text-accent hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none"
           >
             View all notifications
           </Link>

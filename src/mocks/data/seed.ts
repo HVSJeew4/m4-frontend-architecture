@@ -8,7 +8,7 @@ import { DEMO_ACCOUNTS } from './demoAccounts';
 const SEED = 20261108;
 const DAY_MS = 24 * 60 * 60 * 1000;
 export const TREND_DAYS = 180;
-const USER_COUNT = 250;
+export const DEFAULT_USER_COUNT = 250;
 
 const FIRST_NAMES = [
   'Amara',
@@ -83,7 +83,7 @@ export interface SeedData {
   notifications: AppNotification[];
 }
 
-export function createSeed(now = Date.now()): SeedData {
+export function createSeed(now = Date.now(), userCount = DEFAULT_USER_COUNT): SeedData {
   const random = createRandom(SEED);
   const pick = <T>(items: readonly T[]): T => items[Math.floor(random() * items.length)] as T;
   const isoDaysAgo = (days: number) => new Date(now - days * DAY_MS).toISOString();
@@ -98,7 +98,7 @@ export function createSeed(now = Date.now()): SeedData {
     updatedAt: isoDaysAgo(400 - i),
     deletedAt: null,
   }));
-  for (let i = users.length; i < USER_COUNT; i += 1) {
+  for (let i = users.length; i < userCount; i += 1) {
     const first = pick(FIRST_NAMES);
     const last = pick(LAST_NAMES);
     const roll = random();

@@ -22,7 +22,10 @@ export function NotificationList({ items }: { items: AppNotification[] }) {
   return (
     <ul className="divide-y divide-slate-200">
       {items.map((n) => (
-        <li key={n.id} className={cn('flex gap-3 px-4 py-3', !n.read && 'bg-blue-50/60')}>
+        <li
+          key={n.id}
+          className={cn('flex gap-3 px-4 py-3', !n.read && 'bg-blue-50/60 dark:bg-blue-950/60')}
+        >
           <span
             aria-hidden="true"
             className={cn('mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full', DOT[n.level])}
@@ -42,7 +45,7 @@ export function NotificationList({ items }: { items: AppNotification[] }) {
             <button
               type="button"
               onClick={() => markRead.mutate(n.id)}
-              className="h-fit shrink-0 rounded-md px-2 py-1 text-sm font-medium text-blue-800 hover:bg-blue-100 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+              className="h-fit shrink-0 rounded-md px-2 py-1 text-sm font-medium text-accent hover:bg-blue-100 dark:hover:bg-blue-900 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none"
             >
               Mark read<span className="sr-only">: {n.title}</span>
             </button>

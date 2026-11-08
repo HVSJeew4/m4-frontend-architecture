@@ -1,5 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { LoginForm } from '@/components/features/auth/LoginForm';
+import { PageHeading } from '@/components/layout/PageHeading';
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { DEMO_ACCOUNTS } from '@/mocks/data/demoAccounts';
 import { useAuthStore } from '@/stores/authStore';
 import { getSafeRedirect } from '@/utils/safeRedirect';
@@ -16,9 +18,14 @@ export default function LoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-100 p-4">
-      <div className="w-full max-w-sm rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-        <p className="text-lg font-bold text-blue-900">AdminFlow</p>
-        <h1 className="mt-4 text-2xl font-bold text-slate-900">Sign in to AdminFlow</h1>
+      <div className="w-full max-w-sm rounded-xl border border-slate-200 bg-surface p-6 shadow-sm sm:p-8">
+        <div className="-mt-2 -mr-2 flex items-center justify-between">
+          <p className="text-lg font-bold text-accent">AdminFlow</p>
+          <ThemeToggle className="text-slate-700 hover:bg-slate-100 focus-visible:ring-focus" />
+        </div>
+        <PageHeading title="Sign in" className="mt-4">
+          Sign in to AdminFlow
+        </PageHeading>
         <p className="mt-1 mb-6 text-sm text-slate-700">Manage users, metrics and notifications.</p>
         <LoginForm />
         <section

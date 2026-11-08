@@ -19,9 +19,9 @@ export function QuickActions() {
             <li key={to}>
               <Link
                 to={to}
-                className="flex min-h-11 items-center gap-3 rounded-md border border-slate-200 px-3 py-2 font-medium text-slate-800 hover:border-blue-300 hover:bg-blue-50 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+                className="flex min-h-11 items-center gap-3 rounded-md border border-slate-200 px-3 py-2 font-medium text-slate-800 hover:border-blue-300 hover:bg-blue-50 dark:hover:border-blue-700 dark:hover:bg-blue-950 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none"
               >
-                <Icon className="h-5 w-5 text-blue-800" />
+                <Icon className="h-5 w-5 text-accent" />
                 {label}
               </Link>
             </li>

@@ -14,7 +14,7 @@ export function UserMenu() {
       <button
         type="button"
         onClick={logout}
-        className="min-h-11 rounded-md border border-blue-300 px-3 text-sm font-medium hover:bg-blue-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+        className="min-h-11 rounded-md border border-blue-300 px-2 text-sm sm:px-3 font-medium hover:bg-blue-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
       >
         Sign out
       </button>

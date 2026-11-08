@@ -7,9 +7,14 @@ export const userKeys = {
   all: ['users'] as const,
   lists: () => [...userKeys.all, 'list'] as const,
   list: (params: UserListParams) => [...userKeys.lists(), params] as const,
+  // Under lists(), so invalidation and the optimistic edit cover the full list too.
+  everything: (filters: UserListFilters) => [...userKeys.lists(), 'all', filters] as const,
 };
 
-function toQueryString(params: UserListParams): string {
+/** Sort and filters without paging – for the virtual list, which gets every matching user. */
+export type UserListFilters = Omit<UserListParams, 'page' | 'pageSize'>;
+
+function toQueryString(params: Partial<UserListParams> & { all?: 1 }): string {
   const search = new URLSearchParams();
   for (const [key, value] of Object.entries(params)) {
     if (value !== undefined && value !== '') search.set(key, String(value));
@@ -23,6 +28,18 @@ export function useUsers(params: UserListParams) {
     queryFn: ({ signal }) =>
       apiFetch<Paginated<User>>(`/api/users?${toQueryString(params)}`, { signal }),
     // Keep showing the current page while the next one loads, instead of flashing a skeleton.
+    placeholderData: keepPreviousData,
+  });
+}
+
+/** Every user matching the filters, in one request (rendered with a virtual list). */
+export function useAllUsers(filters: UserListFilters) {
+  return useQuery({
+    queryKey: userKeys.everything(filters),
+    queryFn: ({ signal }) =>
+      apiFetch<Paginated<User>>(`/api/users?${toQueryString({ ...filters, all: 1 })}`, {
+        signal,
+      }),
     placeholderData: keepPreviousData,
   });
 }

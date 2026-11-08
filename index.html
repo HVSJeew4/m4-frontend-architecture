@@ -10,6 +10,19 @@
     <meta name="theme-color" content="#1e3a8a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>AdminFlow</title>
+    <!-- Set the theme before the first paint, so dark-mode users never see a white flash.
+         Same rule as src/stores/uiStore.ts (key "adminflow:ui", default "system"). -->
+    <script>
+      try {
+        var saved = JSON.parse(localStorage.getItem('adminflow:ui') || '{}');
+        var theme = (saved.state && saved.state.theme) || 'system';
+        var dark =
+          theme === 'dark' ||
+          (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

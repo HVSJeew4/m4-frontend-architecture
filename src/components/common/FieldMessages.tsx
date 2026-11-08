@@ -15,7 +15,7 @@ export function FieldMessages({ hint, error, hintId, errorId }: FieldMessagesPro
         </p>
       )}
       {error && (
-        <p id={errorId} className="mt-1 text-sm font-medium text-red-700">
+        <p id={errorId} className="mt-1 text-sm font-medium text-danger">
           {error}
         </p>
       )}
@@ -39,7 +39,7 @@ export function FieldLabel({ htmlFor, label, required, hidden }: FieldLabelProps
       {label}
       {/* The asterisk is visual only; the control's `required` attribute is what is announced. */}
       {required && (
-        <span aria-hidden="true" className="text-red-700">
+        <span aria-hidden="true" className="text-danger">
           {' '}
           *
         </span>

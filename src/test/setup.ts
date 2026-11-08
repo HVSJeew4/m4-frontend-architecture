@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/vitest';
 import { cleanup, configure } from '@testing-library/react';
-import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest';
 import { mockConfig } from '@/mocks/config';
 import { resetDb } from '@/mocks/db';
 import { server } from '@/mocks/node';
@@ -13,12 +13,23 @@ installMatchMedia();
 // API round trip plus React rendering can take longer than 1 s on a busy machine.
 configure({ asyncUtilTimeout: 3000 });
 
-// jsdom cannot lay out an SVG chart (no layout engine: width 0, nothing drawn), and loading
-// Recharts in every test file made the suite slow. The chart's data is tested through its
-// accessible data table instead; the chart itself is checked in a real browser.
-vi.mock('@/components/features/dashboard/TrendChart', () => ({ default: () => null }));
+// jsdom has no layout: every element measures 0×0. Elements with an explicit inline height (like
+// VirtualList's scroll box) report that height as clientHeight – what TanStack Virtual reads – so
+// it can work out which rows are visible. Everything else keeps jsdom's normal 0.
+Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
+  configurable: true,
+  get(this: HTMLElement) {
+    return parseFloat(this.style.height) || 0;
+  },
+});
+Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+  configurable: true,
+  get(this: HTMLElement) {
+    return this.style.height ? 800 : 0;
+  },
+});
 
-// jsdom has no layout engine, so no ResizeObserver; Recharts' ResponsiveContainer needs one.
+// jsdom has no layout engine, so no ResizeObserver; useElementWidth (the chart) needs one.
 globalThis.ResizeObserver ??= class {
   observe() {}
   unobserve() {}

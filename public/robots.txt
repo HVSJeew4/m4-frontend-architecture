@@ -1,0 +1,3 @@
+# AdminFlow is a private admin dashboard behind a login: search engines should not index it.
+User-agent: *
+Disallow: /

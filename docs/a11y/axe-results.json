@@ -1,0 +1,1136 @@
+{
+  "measuredAt": "2026-11-08T17:18:44.350Z",
+  "axeVersion": "4.14.0",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa"
+  ],
+  "results": [
+    {
+      "check": "Login",
+      "path": "/login",
+      "theme": "light",
+      "viewport": "phone",
+      "passes": 21,
+      "violations": []
+    },
+    {
+      "check": "Dashboard",
+      "path": "/dashboard",
+      "theme": "light",
+      "viewport": "phone",
+      "passes": 28,
+      "violations": []
+    },
+    {
+      "check": "Users (pages)",
+      "path": "/users",
+      "theme": "light",
+      "viewport": "phone",
+      "passes": 31,
+      "violations": []
+    },
+    {
+      "check": "Users (all, virtual list)",
+      "path": "/users?view=all",
+      "theme": "light",
+      "viewport": "phone",
+      "passes": 31,
+      "violations": []
+    },
+    {
+      "check": "Add user dialog",
+      "path": "/users?new=1",
+      "theme": "light",
+      "viewport": "phone",
+      "passes": 24,
+      "violations": []
+    },
+    {
+      "check": "Delete user dialog",
+      "path": "/users?search=eden",
+      "theme": "light",
+      "viewport": "phone",
+      "passes": 20,
+      "violations": []
+    },
+    {
+      "check": "Notifications",
+      "path": "/notifications",
+      "theme": "light",
+      "viewport": "phone",
+      "passes": 21,
+      "violations": []
+    },
+    {
+      "check": "Not found",
+      "path": "/no-such-page",
+      "theme": "light",
+      "viewport": "phone",
+      "passes": 20,
+      "violations": []
+    },
+    {
+      "check": "Login",
+      "path": "/login",
+      "theme": "light",
+      "viewport": "desktop",
+      "passes": 21,
+      "violations": []
+    },
+    {
+      "check": "Dashboard",
+      "path": "/dashboard",
+      "theme": "light",
+      "viewport": "desktop",
+      "passes": 28,
+      "violations": []
+    },
+    {
+      "check": "Users (pages)",
+      "path": "/users",
+      "theme": "light",
+      "viewport": "desktop",
+      "passes": 32,
+      "violations": []
+    },
+    {
+      "check": "Users (all, virtual list)",
+      "path": "/users?view=all",
+      "theme": "light",
+      "viewport": "desktop",
+      "passes": 31,
+      "violations": []
+    },
+    {
+      "check": "Add user dialog",
+      "path": "/users?new=1",
+      "theme": "light",
+      "viewport": "desktop",
+      "passes": 24,
+      "violations": []
+    },
+    {
+      "check": "Delete user dialog",
+      "path": "/users?search=eden",
+      "theme": "light",
+      "viewport": "desktop",
+      "passes": 20,
+      "violations": []
+    },
+    {
+      "check": "Notifications",
+      "path": "/notifications",
+      "theme": "light",
+      "viewport": "desktop",
+      "passes": 21,
+      "violations": []
+    },
+    {
+      "check": "Not found",
+      "path": "/no-such-page",
+      "theme": "light",
+      "viewport": "desktop",
+      "passes": 22,
+      "violations": []
+    },
+    {
+      "check": "Login",
+      "path": "/login",
+      "theme": "dark",
+      "viewport": "phone",
+      "passes": 21,
+      "violations": []
+    },
+    {
+      "check": "Dashboard",
+      "path": "/dashboard",
+      "theme": "dark",
+      "viewport": "phone",
+      "passes": 28,
+      "violations": []
+    },
+    {
+      "check": "Users (pages)",
+      "path": "/users",
+      "theme": "dark",
+      "viewport": "phone",
+      "passes": 31,
+      "violations": []
+    },
+    {
+      "check": "Users (all, virtual list)",
+      "path": "/users?view=all",
+      "theme": "dark",
+      "viewport": "phone",
+      "passes": 31,
+      "violations": []
+    },
+    {
+      "check": "Add user dialog",
+      "path": "/users?new=1",
+      "theme": "dark",
+      "viewport": "phone",
+      "passes": 24,
+      "violations": []
+    },
+    {
+      "check": "Delete user dialog",
+      "path": "/users?search=eden",
+      "theme": "dark",
+      "viewport": "phone",
+      "passes": 20,
+      "violations": []
+    },
+    {
+      "check": "Notifications",
+      "path": "/notifications",
+      "theme": "dark",
+      "viewport": "phone",
+      "passes": 21,
+      "violations": []
+    },
+    {
+      "check": "Not found",
+      "path": "/no-such-page",
+      "theme": "dark",
+      "viewport": "phone",
+      "passes": 20,
+      "violations": []
+    },
+    {
+      "check": "Login",
+      "path": "/login",
+      "theme": "dark",
+      "viewport": "desktop",
+      "passes": 21,
+      "violations": []
+    },
+    {
+      "check": "Dashboard",
+      "path": "/dashboard",
+      "theme": "dark",
+      "viewport": "desktop",
+      "passes": 28,
+      "violations": []
+    },
+    {
+      "check": "Users (pages)",
+      "path": "/users",
+      "theme": "dark",
+      "viewport": "desktop",
+      "passes": 32,
+      "violations": []
+    },
+    {
+      "check": "Users (all, virtual list)",
+      "path": "/users?view=all",
+      "theme": "dark",
+      "viewport": "desktop",
+      "passes": 31,
+      "violations": []
+    },
+    {
+      "check": "Add user dialog",
+      "path": "/users?new=1",
+      "theme": "dark",
+      "viewport": "desktop",
+      "passes": 24,
+      "violations": []
+    },
+    {
+      "check": "Delete user dialog",
+      "path": "/users?search=eden",
+      "theme": "dark",
+      "viewport": "desktop",
+      "passes": 20,
+      "violations": []
+    },
+    {
+      "check": "Notifications",
+      "path": "/notifications",
+      "theme": "dark",
+      "viewport": "desktop",
+      "passes": 21,
+      "violations": []
+    },
+    {
+      "check": "Not found",
+      "path": "/no-such-page",
+      "theme": "dark",
+      "viewport": "desktop",
+      "passes": 22,
+      "violations": []
+    }
+  ],
+  "reflow": [
+    {
+      "check": "Login",
+      "width": 320,
+      "overflowPx": 0
+    },
+    {
+      "check": "Dashboard",
+      "width": 320,
+      "overflowPx": 0
+    },
+    {
+      "check": "Users (pages)",
+      "width": 320,
+      "overflowPx": 0
+    },
+    {
+      "check": "Users (all, virtual list)",
+      "width": 320,
+      "overflowPx": 0
+    },
+    {
+      "check": "Add user dialog",
+      "width": 320,
+      "overflowPx": 0
+    },
+    {
+      "check": "Notifications",
+      "width": 320,
+      "overflowPx": 0
+    },
+    {
+      "check": "Not found",
+      "width": 320,
+      "overflowPx": 0
+    },
+    {
+      "check": "Login",
+      "width": 640,
+      "overflowPx": 0
+    },
+    {
+      "check": "Dashboard",
+      "width": 640,
+      "overflowPx": 0
+    },
+    {
+      "check": "Users (pages)",
+      "width": 640,
+      "overflowPx": 0
+    },
+    {
+      "check": "Users (all, virtual list)",
+      "width": 640,
+      "overflowPx": 0
+    },
+    {
+      "check": "Add user dialog",
+      "width": 640,
+      "overflowPx": 0
+    },
+    {
+      "check": "Notifications",
+      "width": 640,
+      "overflowPx": 0
+    },
+    {
+      "check": "Not found",
+      "width": 640,
+      "overflowPx": 0
+    }
+  ],
+  "keyboard": [
+    {
+      "check": "Login",
+      "theme": "light",
+      "stops": [
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Email *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Password *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign in",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "(left the page)",
+          "role": "",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Email *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Password *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign in",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "(left the page)",
+          "role": "",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Email *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Password *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign in",
+          "role": "button",
+          "visibleFocus": true
+        }
+      ],
+      "withoutVisibleFocus": 0
+    },
+    {
+      "check": "Dashboard",
+      "theme": "light",
+      "stops": [
+        {
+          "name": "Skip to main content",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "AdminFlow",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Notifications, 3 unread",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign out",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dashboard",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Users",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Notifications",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "30 days",
+          "role": "tab",
+          "visibleFocus": true
+        },
+        {
+          "name": "$00$1,25025$2,50050$3,75075$5,000100Oct ",
+          "role": "tabpanel",
+          "visibleFocus": true
+        },
+        {
+          "name": "Show the chart data as a table",
+          "role": "summary",
+          "visibleFocus": true
+        },
+        {
+          "name": "Add a user",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Find a user",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "View notifications",
+          "role": "a",
+          "visibleFocus": true
+        }
+      ],
+      "withoutVisibleFocus": 0
+    },
+    {
+      "check": "Users (pages)",
+      "theme": "light",
+      "stops": [
+        {
+          "name": "Skip to main content",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "AdminFlow",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Notifications, 3 unread",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign out",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dashboard",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Users",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Notifications",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Add user",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Search by name or email",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Role",
+          "role": "select",
+          "visibleFocus": true
+        },
+        {
+          "name": "Status",
+          "role": "select",
+          "visibleFocus": true
+        },
+        {
+          "name": "Pages",
+          "role": "tab",
+          "visibleFocus": true
+        },
+        {
+          "name": "250 users foundUsersNameEmailRoleStatusJ",
+          "role": "tabpanel",
+          "visibleFocus": true
+        }
+      ],
+      "withoutVisibleFocus": 0
+    },
+    {
+      "check": "Login",
+      "theme": "dark",
+      "stops": [
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Email *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Password *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign in",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "(left the page)",
+          "role": "",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Email *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Password *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign in",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "(left the page)",
+          "role": "",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Email *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Password *",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign in",
+          "role": "button",
+          "visibleFocus": true
+        }
+      ],
+      "withoutVisibleFocus": 0
+    },
+    {
+      "check": "Dashboard",
+      "theme": "dark",
+      "stops": [
+        {
+          "name": "Skip to main content",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "AdminFlow",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Notifications, 3 unread",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign out",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dashboard",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Users",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Notifications",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "30 days",
+          "role": "tab",
+          "visibleFocus": true
+        },
+        {
+          "name": "$00$1,25025$2,50050$3,75075$5,000100Oct ",
+          "role": "tabpanel",
+          "visibleFocus": true
+        },
+        {
+          "name": "Show the chart data as a table",
+          "role": "summary",
+          "visibleFocus": true
+        },
+        {
+          "name": "Add a user",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Find a user",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "View notifications",
+          "role": "a",
+          "visibleFocus": true
+        }
+      ],
+      "withoutVisibleFocus": 0
+    },
+    {
+      "check": "Users (pages)",
+      "theme": "dark",
+      "stops": [
+        {
+          "name": "Skip to main content",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "AdminFlow",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dark mode",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Notifications, 3 unread",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Sign out",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Dashboard",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Users",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Notifications",
+          "role": "a",
+          "visibleFocus": true
+        },
+        {
+          "name": "Add user",
+          "role": "button",
+          "visibleFocus": true
+        },
+        {
+          "name": "Search by name or email",
+          "role": "input",
+          "visibleFocus": true
+        },
+        {
+          "name": "Role",
+          "role": "select",
+          "visibleFocus": true
+        },
+        {
+          "name": "Status",
+          "role": "select",
+          "visibleFocus": true
+        },
+        {
+          "name": "Pages",
+          "role": "tab",
+          "visibleFocus": true
+        },
+        {
+          "name": "250 users foundUsersNameEmailRoleStatusJ",
+          "role": "tabpanel",
+          "visibleFocus": true
+        }
+      ],
+      "withoutVisibleFocus": 0
+    }
+  ],
+  "stories": [
+    {
+      "story": "Components/Alert / Info",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Success",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Warning",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Error",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Dismissible",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Primary",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Secondary",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Danger",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Loading",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Disabled",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Small",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / With Icon",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Icon Only",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Card / With Header Body Footer",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Card / Body Only",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Text",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Email",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Password",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / With Error",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Required",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Disabled",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Modal / Confirm Delete",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Modal / With Form",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Select / Single",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Select / Multi Select",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Select / With Error",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Table / Sortable With Pagination",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Table / Loading",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Table / Empty",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Tabs / Controlled",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Tabs / Starts On Second Tab",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/VirtualList / Ten Thousand Rows",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/VirtualList / Short",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Info",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Success",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Warning",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Error",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Alert / Dismissible",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Primary",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Secondary",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Danger",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Loading",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Disabled",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Small",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / With Icon",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Button / Icon Only",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Card / With Header Body Footer",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Card / Body Only",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Text",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Email",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Password",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / With Error",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Required",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Input / Disabled",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Modal / Confirm Delete",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Modal / With Form",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Select / Single",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Select / Multi Select",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Select / With Error",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Table / Sortable With Pagination",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Table / Loading",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Table / Empty",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Tabs / Controlled",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/Tabs / Starts On Second Tab",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/VirtualList / Ten Thousand Rows",
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "story": "Components/VirtualList / Short",
+      "theme": "dark",
+      "violations": []
+    }
+  ]
+}

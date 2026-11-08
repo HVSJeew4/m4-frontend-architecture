@@ -32,9 +32,12 @@ export function saveDb(): void {
   }
 }
 
-/** Back to the seed data (used by tests, and by `?mock-reset` in the browser). */
-export function resetDb(): void {
-  db = { ...createSeed(), sessions: {} };
+/**
+ * Back to the seed data (used by tests, and by `?mock-reset` / `?mock-users=N` in the browser).
+ * `userCount` makes a bigger data set, e.g. 10,000 users to try the virtual list.
+ */
+export function resetDb(userCount?: number): void {
+  db = { ...createSeed(Date.now(), userCount), sessions: {} };
   saveDb();
 }
 

@@ -52,7 +52,7 @@ export function UserFilters({ params, update }: UserFiltersProps) {
           <button
             type="button"
             onClick={() => setQuery('')}
-            className="absolute right-2 bottom-1.5 rounded px-2 py-1 text-sm font-medium text-blue-800 hover:bg-blue-50 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+            className="absolute right-2 bottom-1.5 rounded px-2 py-1 text-sm font-medium text-accent hover:bg-blue-50 dark:hover:bg-blue-950 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none"
           >
             Clear <span className="sr-only">search</span>
           </button>

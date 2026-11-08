@@ -15,7 +15,7 @@ export function useFieldIds(id: string | undefined, hint?: string, error?: strin
 
 export const controlClasses = (hasError: boolean) =>
   [
-    'block w-full rounded-md border bg-white px-3 py-2 text-slate-900 min-h-11',
-    'focus:ring-2 focus:ring-blue-700 focus:outline-none disabled:bg-slate-100',
-    hasError ? 'border-red-700' : 'border-slate-400',
+    'block w-full rounded-md border bg-surface px-3 py-2 text-slate-900 min-h-11',
+    'focus:ring-2 focus:ring-focus focus:outline-none disabled:bg-slate-100',
+    hasError ? 'border-danger' : 'border-slate-400',
   ].join(' ');

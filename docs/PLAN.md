@@ -158,26 +158,40 @@ so each common component gets its story when it is built, and Part 4 completes t
 
 - [x] Modal focus trap, `Escape` to close, focus returned to the trigger, `aria-labelledby` /
       `aria-describedby` as in the brief (A11y) (done in Part 2, tested in `Modal.test.tsx`)
-- [ ] Icon buttons with `aria-label`, decorative icons `aria-hidden`, visible focus rings,
-      colour contrast ≥ 4.5:1 in light and dark themes, reflow at 320 px, 200 % zoom (A11y)
-- [ ] Code splitting with `lazy()` + `Suspense` per route; Recharts only in the dashboard chunk (Perf)
-- [ ] `memo` / `useMemo` / `useCallback` where profiling shows re-renders – not by default (Perf)
-- [ ] Virtualised user list for large datasets (e.g. a "show 10,000 users" stress mode) (Perf)
-- [ ] Bundle check (`rollup-plugin-visualizer` or `vite build` report); fonts/images optimised (Perf)
-- [ ] Route changes: update `document.title` and move focus to the page heading (A11y)
-- [x] Remaining components + stories: **Tabs** (controlled) – Storybook now has all 8 (CL) (done in Part 2)
-- [ ] Dark mode (bonus, included): system preference + toggle in the header, stored in the UI store (FC bonus)
-- [ ] Automated a11y: axe-core (`src/test/axe.ts`) on every page + Storybook a11y addon with no violations (A11y)
-- [ ] Manual a11y audit: keyboard-only walkthrough, NVDA screen reader, contrast, zoom/reflow;
-      results in `docs/accessibility.md` (A11y)
-- [ ] Lighthouse user-flow on the production build (`/login`, `/dashboard`, `/users`),
-      mobile and desktop; report saved as PDF (Perf)
-- [ ] `docs/architecture.md` – folder structure, state split (server state in React Query vs.
-      client state in Zustand), routing/auth, mock API, styling, testing, trade-offs (SM, CQ)
-- [ ] `scripts/package-submission` builds the 5 files into `submission/` (like Months 2–3)
-- [ ] README: final setup/run/test steps, design decisions, known limitations, Challenge Coverage
-- Commits: `feat: …` / `perf: …` for code, `docs: add accessibility audit and architecture`,
-  `chore: add submission files`
+- [x] Icon buttons with `aria-label`, decorative icons `aria-hidden`, visible focus rings,
+      contrast ≥ 4.5:1 in light and dark themes, reflow at 320 px, 200 % zoom – all verified by
+      `npm run a11y` (fixed: 2 px header overflow at 320 px, 40 px menu button) (A11y)
+- [x] Code splitting with `lazy()` + `Suspense` per route (login stays eager: it is the first page) (Perf)
+- [x] `memo` where rows repeat (virtual list rows, row actions) – not by default (Perf)
+- [x] Virtualised "All users" view (TanStack Virtual, the brief's `VirtualList` API) with
+      `?mock-users=10000` stress data and `aria-setsize` / `aria-posinset` (Perf)
+- [x] Bundle check with the `vite build` report; no web fonts, no images (Perf)
+- [x] Route changes: `document.title` + focus to the page heading after navigation (not on first
+      load or reload, not on query-string changes) (A11y)
+- [x] Remaining components + stories: **Tabs** (controlled) – Storybook now has all 8 (CL) (done in Part 2);
+      plus a VirtualList story and a light/dark toolbar
+- [x] Dark mode (bonus): system preference + `aria-pressed` toggle (header and login), stored in
+      `uiStore`, no flash on load; theme tokens in `index.css` (FC bonus)
+- [x] Automated a11y: axe in jsdom tests, plus `scripts/a11y-audit.mjs` in Chrome – 32 page runs and
+      66 story runs (light + dark) with 0 violations (A11y)
+- [x] Keyboard walkthrough (scripted: Tab order + visible focus), contrast, zoom/reflow; results in
+      `docs/accessibility.md` (A11y)
+- [ ] NVDA screen-reader test – **to be done by hand** (checklist in `docs/accessibility.md` §6) (A11y)
+- [x] Lighthouse on the production build (`/login`, `/dashboard`, `/users`), mobile and desktop,
+      median of 3 runs → `docs/lighthouse/lighthouse-report.pdf`: mobile 98 / 94 / 93, desktop 100 (Perf)
+- [x] `docs/architecture.md` – structure, state split, routing/auth, mock API, components, forms,
+      theming, performance (with measurements), testing, trade-offs (SM, CQ)
+- [x] `scripts/package-submission.mjs` builds the 5 files into `submission/` (like Months 2–3)
+- [x] README: final setup/run/test steps, design decisions, known limitations, Challenge Coverage
+- Changes from the plan, decided by measurement:
+  - Recharts replaced by a hand-written SVG chart (user decision): it cost ~10 mobile Lighthouse
+    points on the dashboard (median 86 vs 96 without it).
+  - The mock API starts on the first API request instead of on page load (/login 81 → 98).
+  - First render in `startTransition`; layout-shift fixes on the users page (CLS 0.07 → 0.008).
+  - No Lighthouse SEO category: `robots.txt` deliberately blocks indexing of this private app.
+- Commits: `test: failing test for route titles and focus, dark mode and virtual list` (TDD red),
+  then `feat: add dark mode, virtual list, code splitting and accessibility/performance audits`,
+  then `chore: add submission files`
 
 ## 5. Rubric map
 
@@ -185,7 +199,7 @@ so each common component gets its story when it is built, and Part 4 completes t
 |---|---|---|
 | Feature Completeness (25) | `src/pages/*`, `src/components/features/*`, `src/mocks/*`; feature tests in `src/**/*.test.tsx`; README "Challenge Coverage" | Part 2 (all features), Part 3 (forms), Part 4 (dark mode bonus) |
 | State Management (20) | `src/stores/{authStore,notificationStore,uiStore}.ts`, `src/api/*` (React Query hooks, optimistic updates), URL state for the users list; "State" section of `docs/architecture.md`; store tests | Part 2 auth/users/notifications, Part 4 architecture doc |
-| Accessibility (20) | `docs/accessibility.md` (axe + Lighthouse + manual keyboard/NVDA results); `eslint-plugin-jsx-a11y`; vitest-axe tests; Storybook a11y addon; Modal focus trap | Part 1 layout/lint, Part 3 form errors, Part 4 a11y tasks |
+| Accessibility (20) | `docs/accessibility.md` (axe + Lighthouse + manual keyboard/NVDA results); `eslint-plugin-jsx-a11y`; axe-core tests + `npm run a11y` (Chrome, both themes); Storybook a11y addon; Modal focus trap | Part 1 layout/lint, Part 3 form errors, Part 4 a11y tasks |
 | Performance (20) | `submission/*-lighthouse.pdf`, `docs/lighthouse/*`, route-level `lazy()`, virtual list, bundle report | Part 4 performance tasks + Lighthouse run |
 | Component Library (10) | `src/components/common/*.stories.tsx` (8 components, all listed variants), `submission/*-storybook.zip` | Parts 2–4 components + stories |
 | Code Quality (5) | TypeScript strict, ESLint/Prettier clean, `npm test`, folder structure as in the brief, `docs/architecture.md` | All parts |

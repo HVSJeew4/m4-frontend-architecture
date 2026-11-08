@@ -29,12 +29,15 @@ export function configureApiAuth(options: typeof auth): void {
   Object.assign(auth, options);
 }
 
-// Requests wait for this before going out. In the browser it is the mock API (MSW) starting,
-// so the first render does not have to wait for it – only the data does.
-let ready: Promise<unknown> = Promise.resolve();
+// Runs once, before the first request goes out. In the browser it starts the mock API (MSW):
+// started lazily, so a page that makes no request (the login page, until you submit) never loads
+// or runs it, and the first render never waits for it – only the data does.
+let beforeFirstRequest: () => Promise<unknown> = () => Promise.resolve();
+let ready: Promise<unknown> | null = null;
 
-export function setApiReady(promise: Promise<unknown>): void {
-  ready = promise;
+export function setBeforeFirstRequest(start: () => Promise<unknown>): void {
+  beforeFirstRequest = start;
+  ready = null;
 }
 
 interface RequestOptions {
@@ -49,7 +52,7 @@ export async function apiFetch<T>(
   path: string,
   { method = 'GET', body, signal, token: explicitToken }: RequestOptions = {},
 ): Promise<T> {
-  await ready;
+  await (ready ??= beforeFirstRequest());
   const token = explicitToken ?? auth.getToken();
   const headers = new Headers({ Accept: 'application/json' });
   if (token) headers.set('Authorization', `Bearer ${token}`);

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { useState } from 'react';
 import { useTrend } from '@/api/dashboard';
 import { Card, CardBody, CardHeader } from '@/components/common/Card';
 import { ErrorState } from '@/components/common/ErrorState';
@@ -6,16 +6,13 @@ import { LoadingState, Skeleton } from '@/components/common/Skeleton';
 import { Tabs } from '@/components/common/Tabs';
 import { TREND_RANGES, type TrendPoint, type TrendRange } from '@/types/dashboard';
 import { formatCurrency, formatDate, formatNumber } from '@/utils/format';
-
-const TrendChart = lazy(() => import('./TrendChart'));
+import { TrendChart } from './TrendChart';
 
 const RANGE_TABS = TREND_RANGES.map((days) => ({ value: String(days), label: `${days} days` }));
 
 export function TrendCard() {
   const [range, setRange] = useState<TrendRange>(30);
   const { data, isPending, isError, error, refetch } = useTrend(range);
-
-  const chartSkeleton = <Skeleton className="h-72 w-full" />;
 
   return (
     <Card aria-labelledby="trend-title">
@@ -33,14 +30,12 @@ export function TrendCard() {
           {isPending && (
             <>
               <LoadingState label="Loading trend" />
-              {chartSkeleton}
+              <Skeleton className="h-72 w-full" />
             </>
           )}
           {data && (
             <>
-              <Suspense fallback={chartSkeleton}>
-                <TrendChart data={data} />
-              </Suspense>
+              <TrendChart data={data} />
               <TrendTable data={data} />
             </>
           )}
@@ -54,7 +49,7 @@ export function TrendCard() {
 function TrendTable({ data }: { data: TrendPoint[] }) {
   return (
     <details className="mt-4">
-      <summary className="cursor-pointer rounded text-sm font-medium text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none">
+      <summary className="cursor-pointer rounded text-sm font-medium text-accent focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none">
         Show the chart data as a table
       </summary>
       <div

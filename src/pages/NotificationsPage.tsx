@@ -4,6 +4,7 @@ import { Card } from '@/components/common/Card';
 import { ErrorState } from '@/components/common/ErrorState';
 import { LoadingState, Skeleton } from '@/components/common/Skeleton';
 import { NotificationList } from '@/components/features/notifications/NotificationList';
+import { PageHeading } from '@/components/layout/PageHeading';
 
 export default function NotificationsPage() {
   const { data, isPending, isError, error, refetch } = useNotifications();
@@ -13,7 +14,7 @@ export default function NotificationsPage() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Notifications</h1>
+          <PageHeading title="Notifications" />
           {data && (
             <p className="mt-1 text-slate-700">
               {data.unreadCount === 0 ? 'All caught up.' : `${data.unreadCount} unread`}

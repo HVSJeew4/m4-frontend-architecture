@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { UserMenu } from '@/components/features/auth/UserMenu';
 import { NotificationBell } from '@/components/features/notifications/NotificationBell';
+import { ThemeToggle } from './ThemeToggle';
 
 interface HeaderProps {
   navId: string;
@@ -11,11 +12,15 @@ interface HeaderProps {
 
 export function Header({ navId, navOpen, onToggleNav, className = '' }: HeaderProps) {
   return (
-    <header className={`flex items-center gap-3 bg-blue-900 px-4 py-3 text-white ${className}`}>
+    // Tighter padding and gaps below sm: at 320 px every control still fits without horizontal
+    // scrolling (WCAG 1.4.10 reflow), and each keeps a 44 px touch target.
+    <header
+      className={`flex items-center gap-2 bg-blue-900 px-3 py-3 text-white sm:gap-3 sm:px-4 ${className}`}
+    >
       {/* Menu button only on small screens; from md up the navigation is always visible. */}
       <button
         type="button"
-        className="rounded-md p-2 hover:bg-blue-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none md:hidden"
+        className="flex h-11 w-11 items-center justify-center rounded-md hover:bg-blue-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none md:hidden"
         aria-expanded={navOpen}
         aria-controls={navId}
         aria-label={navOpen ? 'Close navigation' : 'Open navigation'}
@@ -38,7 +43,8 @@ export function Header({ navId, navOpen, onToggleNav, className = '' }: HeaderPr
       >
         AdminFlow
       </Link>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex items-center gap-1 sm:gap-2">
+        <ThemeToggle className="hover:bg-blue-800 focus-visible:ring-white" />
         <NotificationBell />
         <UserMenu />
       </div>

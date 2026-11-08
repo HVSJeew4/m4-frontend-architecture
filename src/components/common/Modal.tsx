@@ -110,7 +110,7 @@ export function Modal({
       className="fixed inset-0 z-40 flex items-end justify-center sm:items-center sm:p-4"
     >
       {/* Backdrop: clicking it closes the dialog; hidden from assistive tech (Escape does the same). */}
-      <div aria-hidden="true" className="absolute inset-0 bg-slate-900/50" onClick={onClose} />
+      <div aria-hidden="true" className="absolute inset-0 bg-black/50" onClick={onClose} />
       {/* The dialog itself handles Escape and Tab (WAI-ARIA dialog pattern), so the key handler
           belongs on this element even though a dialog is not an "interactive" role. */}
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
@@ -123,7 +123,7 @@ export function Modal({
         tabIndex={-1}
         onKeyDown={handleKeyDown}
         className={cn(
-          'relative flex max-h-[90vh] w-full flex-col rounded-t-xl bg-white shadow-xl focus:outline-none sm:rounded-xl',
+          'relative flex max-h-[90vh] w-full flex-col rounded-t-xl bg-surface shadow-xl focus:outline-none sm:rounded-xl',
           size === 'sm' ? 'sm:max-w-md' : 'sm:max-w-lg',
         )}
       >
@@ -142,7 +142,7 @@ export function Modal({
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="-m-2 rounded-md p-2 text-slate-600 hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+            className="-m-2 rounded-md p-2 text-slate-600 hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none"
           >
             <XIcon />
           </button>

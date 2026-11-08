@@ -1,0 +1,145 @@
+{
+  "measuredAt": "2026-11-08T17:10:30.124Z",
+  "lighthouse": "13.6.0",
+  "runsPerPage": 3,
+  "runs": [
+    {
+      "page": "/login",
+      "formFactor": "mobile",
+      "finalUrl": "http://localhost:4173/login",
+      "scores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100
+      },
+      "metrics": {
+        "FCP": "0.8 s",
+        "LCP": "0.8 s",
+        "TBT": "170 ms",
+        "CLS": "0",
+        "Speed Index": "0.8 s"
+      },
+      "report": "docs/lighthouse/mobile-login.html",
+      "allPerformanceScores": [
+        92,
+        99,
+        98
+      ]
+    },
+    {
+      "page": "/dashboard",
+      "formFactor": "mobile",
+      "finalUrl": "http://localhost:4173/dashboard",
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best-practices": 100
+      },
+      "metrics": {
+        "FCP": "0.8 s",
+        "LCP": "1.6 s",
+        "TBT": "290 ms",
+        "CLS": "0",
+        "Speed Index": "1.0 s"
+      },
+      "report": "docs/lighthouse/mobile-dashboard.html",
+      "allPerformanceScores": [
+        94,
+        94,
+        97
+      ]
+    },
+    {
+      "page": "/users",
+      "formFactor": "mobile",
+      "finalUrl": "http://localhost:4173/users",
+      "scores": {
+        "performance": 93,
+        "accessibility": 100,
+        "best-practices": 100
+      },
+      "metrics": {
+        "FCP": "0.8 s",
+        "LCP": "1.8 s",
+        "TBT": "290 ms",
+        "CLS": "0.008",
+        "Speed Index": "1.0 s"
+      },
+      "report": "docs/lighthouse/mobile-users.html",
+      "allPerformanceScores": [
+        96,
+        93,
+        93
+      ]
+    },
+    {
+      "page": "/login",
+      "formFactor": "desktop",
+      "finalUrl": "http://localhost:4173/login",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100
+      },
+      "metrics": {
+        "FCP": "0.2 s",
+        "LCP": "0.2 s",
+        "TBT": "0 ms",
+        "CLS": "0",
+        "Speed Index": "0.3 s"
+      },
+      "report": "docs/lighthouse/desktop-login.html",
+      "allPerformanceScores": [
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "page": "/dashboard",
+      "formFactor": "desktop",
+      "finalUrl": "http://localhost:4173/dashboard",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100
+      },
+      "metrics": {
+        "FCP": "0.3 s",
+        "LCP": "0.5 s",
+        "TBT": "0 ms",
+        "CLS": "0",
+        "Speed Index": "0.3 s"
+      },
+      "report": "docs/lighthouse/desktop-dashboard.html",
+      "allPerformanceScores": [
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "page": "/users",
+      "formFactor": "desktop",
+      "finalUrl": "http://localhost:4173/users",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100
+      },
+      "metrics": {
+        "FCP": "0.3 s",
+        "LCP": "0.5 s",
+        "TBT": "0 ms",
+        "CLS": "0.003",
+        "Speed Index": "0.3 s"
+      },
+      "report": "docs/lighthouse/desktop-users.html",
+      "allPerformanceScores": [
+        100,
+        100,
+        100
+      ]
+    }
+  ]
+}

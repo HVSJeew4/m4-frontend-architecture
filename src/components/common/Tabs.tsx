@@ -59,7 +59,9 @@ export function Tabs<V extends string>({
       <div
         role="tablist"
         aria-label={label}
-        className="inline-flex gap-1 rounded-lg bg-slate-100 p-1"
+        // In dark mode the bar is darker and the selected pill lighter than the card, so the
+        // selected tab is shown by shape too, not only by its text colour (WCAG 1.4.1).
+        className="inline-flex gap-1 rounded-lg bg-slate-100 p-1 dark:bg-slate-50"
       >
         {tabs.map((tab, index) => {
           const selected = tab.value === value;
@@ -79,9 +81,9 @@ export function Tabs<V extends string>({
               onClick={() => onChange(tab.value)}
               onKeyDown={(event) => handleKeyDown(event, index)}
               className={cn(
-                'min-h-9 rounded-md px-3 text-sm font-medium focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none',
+                'min-h-9 rounded-md px-3 text-sm font-medium focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none',
                 selected
-                  ? 'bg-white text-blue-900 shadow-sm'
+                  ? 'bg-surface text-accent shadow-sm dark:bg-slate-300'
                   : 'text-slate-700 hover:text-slate-900',
               )}
             >
@@ -95,7 +97,7 @@ export function Tabs<V extends string>({
         id={panelId}
         aria-labelledby={tabId(value)}
         tabIndex={0}
-        className="mt-4 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+        className="mt-4 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none"
       >
         {children}
       </div>

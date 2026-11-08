@@ -13,7 +13,7 @@ export function Sidebar({ id, open, onNavigate }: SidebarProps) {
     <nav
       id={id}
       aria-label="Primary"
-      className={`${open ? 'block' : 'hidden'} border-b border-slate-200 bg-white md:block md:border-r md:border-b-0`}
+      className={`${open ? 'block' : 'hidden'} border-b border-slate-200 bg-surface md:block md:border-r md:border-b-0`}
     >
       <ul className="flex flex-col gap-1 p-3">
         {NAV_ITEMS.map((item) => (
@@ -23,9 +23,9 @@ export function Sidebar({ id, open, onNavigate }: SidebarProps) {
               to={item.to}
               onClick={onNavigate}
               className={({ isActive }) =>
-                `block rounded-md px-3 py-2 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none ${
+                `block rounded-md px-3 py-2 focus-visible:ring-2 focus-visible:ring-focus focus-visible:outline-none ${
                   isActive
-                    ? 'bg-blue-50 font-semibold text-blue-900'
+                    ? 'bg-blue-50 font-semibold text-accent dark:bg-blue-950'
                     : 'text-slate-700 hover:bg-slate-100'
                 }`
               }

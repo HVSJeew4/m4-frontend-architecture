@@ -37,14 +37,14 @@ export function MetricCards() {
       <ul className="grid gap-4 sm:grid-cols-3" aria-busy={isPending || undefined}>
         {isPending &&
           [0, 1, 2].map((i) => (
-            <li key={i} className="rounded-lg border border-slate-200 bg-white p-5">
+            <li key={i} className="rounded-lg border border-slate-200 bg-surface p-5">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="mt-3 h-8 w-32" />
               <Skeleton className="mt-3 h-4 w-40" />
             </li>
           ))}
         {cards.map(({ label, metric, format, period }) => (
-          <li key={label} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <li key={label} className="rounded-lg border border-slate-200 bg-surface p-5 shadow-sm">
             <p className="text-sm font-medium text-slate-700">{label}</p>
             <p className="mt-1 text-3xl font-bold tracking-tight text-slate-900">
               {format(metric.value)}
@@ -67,7 +67,7 @@ function Change({ metric, period }: { metric: Metric; period: string }) {
     <p
       className={cn(
         'mt-2 flex items-center gap-1 text-sm font-medium',
-        up ? 'text-green-800' : 'text-red-700',
+        up ? 'text-success' : 'text-danger',
       )}
     >
       <Arrow className="h-4 w-4" />

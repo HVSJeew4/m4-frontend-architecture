@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.19"
   },
   "scripts": {
     "dev": "vite",
@@ -16,7 +16,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "a11y": "node scripts/a11y-audit.mjs",
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "submission": "npm run build-storybook && node scripts/package-submission.mjs"
   },
   "msw": {
     "workerDirectory": [
@@ -26,12 +29,11 @@
   "dependencies": {
     "@hookform/resolvers": "7.0.3",
     "@tanstack/react-query": "5.107.1",
+    "@tanstack/react-virtual": "3.14.26",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "7.91.0",
-    "react-is": "18.3.1",
     "react-router-dom": "6.30.6",
-    "recharts": "3.10.1",
     "zod": "4.6.7",
     "zustand": "5.1.0"
   },
@@ -55,11 +57,15 @@
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-react-refresh": "0.5.7",
     "eslint-plugin-storybook": "10.6.6",
+    "fflate": "0.8.3",
     "globals": "17.14.0",
     "jsdom": "31.0.0",
+    "lighthouse": "13.6.0",
     "msw": "3.0.4",
     "msw-storybook-addon": "3.0.3",
+    "pdf-lib": "1.17.1",
     "prettier": "3.9.10",
+    "puppeteer-core": "25.16.0",
     "storybook": "10.6.6",
     "tailwindcss": "4.3.5",
     "typescript": "6.0.3",
