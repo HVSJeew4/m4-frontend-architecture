@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { delay, http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, it } from 'vitest';
 import App from '@/App';
+import { mockConfig } from '@/mocks/config';
 import { getDb } from '@/mocks/db';
 import { server } from '@/mocks/node';
 import { signInAs } from '@/test/auth';
@@ -116,18 +117,19 @@ describe('users page', () => {
     expect(await screen.findByText('251 users found')).toBeInTheDocument();
   });
 
-  it('shows the server error in the dialog when the email is taken', async () => {
+  it('shows a server error that is not about one field as an alert in the dialog', async () => {
     const user = userEvent.setup();
     await renderUsers();
+    mockConfig.fail.add('users'); // the next request (the POST) answers 500
 
     await user.click(screen.getByRole('button', { name: 'Add user' }));
     const dialog = screen.getByRole('dialog', { name: 'Add user' });
-    await user.type(within(dialog).getByLabelText(/Name/), 'Copy Cat');
-    await user.type(within(dialog).getByLabelText(/Email/), 'editor@adminflow.test');
+    await user.type(within(dialog).getByLabelText(/Name/), 'Nadia Perera');
+    await user.type(within(dialog).getByLabelText(/Email/), 'nadia@example.com');
     await user.click(within(dialog).getByRole('button', { name: 'Create user' }));
 
-    expect(await within(dialog).findByText('Email already in use')).toBeInTheDocument();
-    expect(within(dialog).getByLabelText(/Name/)).toHaveValue('Copy Cat');
+    expect(await within(dialog).findByRole('alert')).toHaveTextContent('Simulated server error');
+    expect(within(dialog).getByLabelText(/Name/)).toHaveValue('Nadia Perera');
   });
 
   it('edits optimistically: the row changes before the server answers', async () => {
