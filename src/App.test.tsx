@@ -1,11 +1,16 @@
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import App from './App';
+import { signInAs } from './test/auth';
 import { axeViolations } from './test/axe';
 import { renderWithProviders } from './test/render';
 
 describe('App shell', () => {
+  beforeEach(() => {
+    signInAs();
+  });
+
   it('redirects / to the dashboard and marks its nav link as current', () => {
     renderWithProviders(<App />, { route: '/' });
 
