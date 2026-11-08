@@ -11,10 +11,11 @@ describe('App shell', () => {
     signInAs();
   });
 
-  it('redirects / to the dashboard and marks its nav link as current', () => {
+  // Pages are lazy-loaded, so headings appear after render: findBy* waits for them.
+  it('redirects / to the dashboard and marks its nav link as current', async () => {
     renderWithProviders(<App />, { route: '/' });
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Dashboard' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: 'Dashboard' })).toBeInTheDocument();
     const nav = screen.getByRole('navigation', { name: 'Primary' });
     expect(within(nav).getByRole('link', { name: 'Dashboard' })).toHaveAttribute(
       'aria-current',
@@ -39,7 +40,7 @@ describe('App shell', () => {
     renderWithProviders(<App />, { route: '/dashboard' });
 
     await user.click(screen.getByRole('link', { name: 'Users' }));
-    expect(screen.getByRole('heading', { level: 1, name: 'Users' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: 'Users' })).toBeInTheDocument();
   });
 
   it('toggles the mobile navigation and reports its state with aria-expanded', async () => {
@@ -64,15 +65,18 @@ describe('App shell', () => {
     );
   });
 
-  it('shows a not-found page inside the layout for unknown routes', () => {
+  it('shows a not-found page inside the layout for unknown routes', async () => {
     renderWithProviders(<App />, { route: '/nope' });
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Page not found' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Page not found' }),
+    ).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Primary' })).toBeInTheDocument();
   });
 
   it('has no axe violations', async () => {
     const { container } = renderWithProviders(<App />, { route: '/dashboard' });
+    await screen.findByRole('heading', { level: 1, name: 'Dashboard' });
     expect(await axeViolations(container)).toEqual([]);
   });
 });

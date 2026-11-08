@@ -52,10 +52,10 @@ describe('authentication flow', () => {
     expect(screen.getByLabelText(/email/i)).toHaveAttribute('aria-invalid', 'true');
   });
 
-  it('lets a signed-in admin straight through, and /login sends them to the dashboard', () => {
+  it('lets a signed-in admin straight through, and /login sends them to the dashboard', async () => {
     signInAs();
     renderWithProviders(<App />, { route: '/login' });
-    expect(screen.getByRole('heading', { level: 1, name: 'Dashboard' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: 'Dashboard' })).toBeInTheDocument();
   });
 
   it('signs out from the header, returns to /login and empties the query cache', async () => {
