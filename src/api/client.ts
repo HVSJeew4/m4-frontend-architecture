@@ -11,6 +11,11 @@ export class ApiError extends Error {
     this.status = status;
     this.fieldErrors = body?.fieldErrors ?? {};
   }
+
+  /** True when the server named specific fields – forms show those on the fields, not in an alert. */
+  get hasFieldErrors(): boolean {
+    return Object.keys(this.fieldErrors).length > 0;
+  }
 }
 
 // Set by the auth store (see stores/authStore.ts). Passed in rather than imported, because the

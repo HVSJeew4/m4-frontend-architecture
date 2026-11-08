@@ -146,12 +146,13 @@ so each common component gets its story when it is built, and Part 4 completes t
 - [x] `schemas/loginSchema.ts` for the login form (done in Part 2)
 - [x] `UserForm` with React Hook Form + `zodResolver`; reused for create and edit (done in Part 2)
 - [x] `aria-invalid`, `aria-describedby` to hint and error, required fields marked (done in Part 2, in Input/Select/Checkbox)
-- [ ] Focus moves to the first invalid field on submit – verify and test (A11y)
-- [ ] Server field errors mapped onto the field (409 "email already exists" under Email, not only an alert) (FC)
-- [ ] Unsaved-change guard: confirm before closing a dirty form (Cancel, Escape, backdrop) (FC)
-- [ ] Edit form: Save disabled until something changed; trim/normalise email (lower-case) in the schema (FC)
-- [ ] Tests: schema rules (unit), server error mapping, unsaved-change guard (CQ)
-- Commit: `feat: add server-side field errors and unsaved-change guard to forms`
+- [x] Focus moves to the first invalid field on submit – React Hook Form `shouldFocusError` + forwarded refs; tested (A11y)
+- [x] Server field errors mapped onto the field with `setError` (409 "email already exists" under Email, focused); other server errors stay an alert (FC)
+- [x] Unsaved-change guard: "Discard changes?" before closing a dirty form (Cancel, Escape, backdrop); "Keep editing" focused first (FC)
+- [x] Edit sends only changed fields; with no real change Save just closes (no request, no "Changes saved"). Not a disabled button: disabled buttons are skipped by the keyboard and give no reason. Email trimmed + lower-cased in the schema (FC)
+- [x] Tests: schema rules (unit), server error mapping, unsaved-change guard, changed-fields PATCH (CQ)
+- Commits: `test: failing test for server field errors, unsaved-change guard and email normalisation` (TDD red),
+  then `feat: add server-side field errors and unsaved-change guard to forms`
 
 ### Part 4 – Accessibility & Performance (brief: 20 min + offline)
 

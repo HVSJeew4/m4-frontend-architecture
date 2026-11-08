@@ -4,6 +4,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';
 import { mockConfig } from '@/mocks/config';
 import { resetDb } from '@/mocks/db';
 import { server } from '@/mocks/node';
+import { useNotificationStore } from '@/stores/notificationStore';
 
 // findBy*/waitFor wait up to 3 s (default 1 s): with all test files running in parallel, a mock
 // API round trip plus React rendering can take longer than 1 s on a busy machine.
@@ -30,6 +31,8 @@ beforeEach(() => {
   mockConfig.latencyMs = 0;
   mockConfig.fail.clear();
   resetDb();
+  // Zustand stores are module-level singletons: reset them so no toast leaks into the next test.
+  useNotificationStore.setState({ toasts: [] });
 });
 
 afterEach(() => {

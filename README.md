@@ -86,13 +86,15 @@ npm test
 
 Tests run in jsdom with MSW in Node mode, so they use the same mock API as the browser. Each test
 starts from fresh seed data with no latency. Any request without a mock handler fails the test.
-125 tests in 19 files:
+146 tests in 21 files:
 
 | File | What it covers |
 |---|---|
 | `src/App.test.tsx` | App shell: routing, active nav link, skip link, mobile nav toggle, 404, axe |
 | `src/components/features/auth/auth.test.tsx` | Redirect to `/login` and back, login validation and server errors, sign-out clears the cache |
 | `src/components/features/users/users.test.tsx` | Paging, sorting (`aria-sort`), role filter, debounced search (one request), create, duplicate email, optimistic edit + rollback, delete + Undo, error + retry, axe |
+| `src/components/features/users/userForm.test.tsx` | Focus on first invalid field, 409 on the Email field, email normalised, PATCH with only changed fields, no request when unchanged, "Discard changes?" guard |
+| `src/schemas/userSchema.test.ts` | The brief's schema rules plus trimming / lower-casing, and `loginSchema` |
 | `src/components/features/dashboard/dashboard.test.tsx` | Metric cards, range tabs + data table, activity, partial failure, axe |
 | `src/components/features/notifications/notifications.test.tsx` | Bell unread count, panel, mark read / all read, toasts |
 | `src/stores/authStore.test.ts` | Login/logout, `sessionStorage`, token on requests, 401 → session expired |
@@ -163,6 +165,14 @@ named in the brief's own example (`schemas/userSchema.ts`).
 - **Hand-built Modal with an explicit focus trap** (the brief asks for one), plus `inert` on the
   rest of the page and focus returned to the trigger.
 - **Native `<select>`** for single and multi-select: accessible on every device for free.
+- **Forms:** Zod is the single source of validation rules (`src/schemas/`); the browser's own
+  validation is off (`noValidate`) so messages are consistent. Inputs are cleaned in the schema
+  (trimmed name, trimmed lower-case email). Server errors that name a field (400/409) appear on
+  that field via `setError`; anything else is an alert in the dialog.
+- **Unsaved-change guard** on Cancel, Escape and backdrop, with "Keep editing" focused first.
+- **Edit sends only the changed fields** (compared after cleaning), so it cannot overwrite another
+  admin's change to a different field. If nothing changed, Save just closes. Save is never
+  disabled: disabled buttons are skipped by the keyboard and do not say why.
 - **Chart loaded on demand** (`React.lazy`): Recharts (~109 KB gzipped) never loads on the login page.
   A data table next to the chart is its text alternative.
 - **Requests wait for the mock API, the page does not:** `setApiReady()` in `main.tsx`.
@@ -175,7 +185,10 @@ named in the brief's own example (`schemas/userSchema.ts`).
       chart, activity, quick actions), user CRUD (pagination, sorting, filtering, optimistic edit,
       soft delete with Undo), debounced search, notifications (toasts + notification centre),
       loading/empty/error states, all 8 Storybook components
-- [ ] Part 3 – Forms & validation
+- [x] Part 3 – Forms & validation: the brief's `userSchema` (plus trimming and lower-case email)
+      and `loginSchema` with React Hook Form + `zodResolver`; accessible errors (`aria-invalid`,
+      `aria-describedby`, focus on the first invalid field); server field errors on the field;
+      "Discard changes?" guard; edit sends only changed fields
 - [ ] Part 4 – Accessibility & performance
 
 ## Known Limitations
